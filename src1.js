@@ -36,75 +36,63 @@ let canClick = true; //Variable para bloquear opción de clic
 
 const reveal = (e) => {
   console.log('Click en una carta', canClick);
-  if (!canClick) return; //Si no se puede hacer clic, salimos de la función
+  if (!canClick) return;
 
-  const currentCard = e.currentTarget; //Obtenemos carta actual clickeada(currentCard)
-  currentCard.classList.add('flipped'); //Agregamos clase flipped en currentCard
+  const currentCard = e.currentTarget;
+
+  // Verificar que currentCard no sea la misma que firstCard
+  if (currentCard === firstCard) return;
+
+  currentCard.classList.add('flipped');
 
   if (!firstCard) {
-    //Si firstCard = null...
     firstCard = currentCard;
-    count--; //Valor de la primera carta
+    count--;
   } else {
-    secondCard = currentCard; //valor de la segunda cartaconsole.log(secondCard);
-    count++; //Aumentamos contador una vez seleccionada la segunda
+    secondCard = currentCard;
+    count++;
     counter.textContent = `Intentos: ${count}`;
   }
 
-  //Comparamos valores de las 2 cartas
-
   if (firstCard && secondCard) {
-    //Obtenemos contenido de la cara back de la carta
     const firstEmoji = firstCard.querySelector('.back').textContent;
     const secondEmoji = secondCard.querySelector('.back').textContent;
 
-    console.log(firstCard, secondCard);
-
     if (firstEmoji === secondEmoji) {
-      //Clase css coinciden, emparejada,
       firstCard.classList.add('matched');
       secondCard.classList.add('matched');
 
-      // Eliminar el evento de click en ambas cartas.
       firstCard.removeEventListener('click', reveal);
       secondCard.removeEventListener('click', reveal);
 
-      // Vaciamos las cartas.
       firstCard = null;
       secondCard = null;
     } else {
-      canClick = false; //Bloqueamos opción de clic
+      canClick = false;
 
       setTimeout(() => {
-        //Eliminamos la clase flipped de la tarjeta actual
-        if (firstCard) firstCard.classList.remove('flipped'); //Una vez que se ha verificado la coincidencia,
-        //elimina clase flipped y
+        if (firstCard) firstCard.classList.remove('flipped');
         if (secondCard) secondCard.classList.remove('flipped');
-        firstCard = null; //volvemos a no tener valor
+        firstCard = null;
         secondCard = null;
 
-        canClick = true; //Desbloqueamos opción de clic después de 2 segundos
+        canClick = true;
       }, 1000);
     }
 
     count++;
     counter.textContent = `Intentos: ${count}`;
   }
-  //Comprabamos si ha encontrado todas las parejas
-  const matchedCards = document.querySelectorAll('.matched'); //Obtenemos todas las cartas emparejadas
+
+  const matchedCards = document.querySelectorAll('.matched');
   if (matchedCards.length === 16) {
-    //Si hay 16 cartas emparejadas
-    counter.textContent = `¡Juego completado en ${count} intentos!`; //Mostramos mensaje con número de intentos
-  } /*setTimeout(() => {
-      alert(
-        `¡Felicidades! Has encontrado todas las parejas en ${count} intentos.`
-      );
-    }, 500);*/
+    counter.textContent = `¡Juego completado en ${count} intentos!`;
+  }
 };
 
 const matchedCards = document.querySelectorAll('.matched');
 
-if (matchedCards.lenght === cards.length) {
+if (matchedCards.length === cards.length) {
   for (const card of cards) {
     card.removeEventListener('click', reveal);
   }
@@ -150,19 +138,20 @@ function resetGame() {
     card.addEventListener('click', reveal);
   }
 
-  //** setTimeout(() => {       (para que se mezclen una vez se hayan girado las cartas)
-
-  // Volver a mezclar los emojis
-  const randomEmojis = emojis.sort(() => Math.random() - 0.5);
-  for (let i = 0; i < cards.length; i++) {
-    cards[i].querySelector('.back').innerHTML = randomEmojis[i];
-  }
-  //** */ }, 1000); (para que se mezclen una vez se hayan girado las cartas)
+  setTimeout(() => {
+    // Volver a mezclar los emojis
+    const randomEmojis = emojis.sort(() => Math.random() - 0.5);
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].querySelector('.back').innerHTML = randomEmojis[i];
+    }
+  }, 1000);
 
   // Reiniciar variables
   firstCard = null;
   secondCard = null;
-  count = 0; // a mi ahora no se me pone el contador a 0 y no he tocado nada del código lo tengo exactamente igual que Javi...
+  count = 0;
+  matches = 0; // Reiniciar variable de matches a 0
+  counter.textContent = `Intentos: ${count}`;
 }
 
 const resetButton = document.querySelector('.botonReinicio');

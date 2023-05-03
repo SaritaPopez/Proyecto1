@@ -20,7 +20,7 @@ body {
     'header' 5rem
     'nav' 1.5rem
     'main' 1fr
-    'footer' 2rem;
+    'footer' 3rem;
 }
 
 header {
@@ -137,12 +137,13 @@ section > h2 {
 main {
   grid-area: main;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(4, 130px);
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
   align-items: center;
   margin-left: 1rem;
   margin-right: 1rem;
+  margin-top: 1rem;
 }
 img {
   height: 2rem;
@@ -279,7 +280,6 @@ img {
   border-radius: 8px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 7px;
   padding: 20px 40px;
   color: #fff;
   display: flex;
@@ -292,7 +292,7 @@ img {
 }
 .botonReinicio span {
   background-color: #111;
-  padding: 15px 24px;
+  padding: 7px 12px;
   border-radius: 6px;
   transition: 0.3s;
 }
@@ -308,6 +308,9 @@ img {
     width: 80vw;
     height: 80vh;
   }
+  #counter {
+    margin-top: 2rem;
+  }
 }
 
 @media (min-width: 425px) {
@@ -319,6 +322,7 @@ img {
   }
   #counter {
     font-size: 1rem;
+    margin-top: 2rem;
   }
   #modaleBoxB {
     width: 80vw;
@@ -343,7 +347,7 @@ img {
   }
   #counter {
     font-size: 1.2rem;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
   }
   html {
     background-image: url(/Imagenes/fondo-juego.jpg);
@@ -375,9 +379,25 @@ img {
     transform: rotateY(180deg);
     box-shadow: 0.1px 5px 5px 5px rgba(10, 6, 6, 0.165);
   }
+  main {
+    grid-template-rows: repeat(4, 190px);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 @media (min-width: 1024px) {
+  body {
+    min-height: 365px;
+    height: 100vh;
+    font-family: sans-serif;
+    font-weight: bold;
+    display: grid;
+    grid-template:
+      'header' 5rem
+      'nav' 1.5rem
+      'main' 1fr
+      'footer' 8rem;
+  }
   .card {
     width: 130px;
     height: 170px;
@@ -402,6 +422,7 @@ img {
   }
   #counter {
     font-size: 1.5rem;
+    margin-top: 4rem;
   }
   img {
     height: 4rem;
@@ -423,13 +444,25 @@ img {
   }
   main {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: repeat(2, 250px);
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-items: center;
     align-content: center;
   }
 }
 @media (min-width: 1350px) {
+  body {
+    min-height: 365px;
+    height: 100vh;
+    font-family: sans-serif;
+    font-weight: bold;
+    display: grid;
+    grid-template:
+      'header' 5rem
+      'nav' 1.5rem
+      'main' 1fr
+      'footer' 8rem;
+  }
   .card {
     width: 130px;
     height: 170px;
@@ -457,6 +490,7 @@ img {
   }
   #counter {
     font-size: 1.5rem;
+    margin-top: 5rem;
   }
   img {
     height: 4rem;
@@ -477,10 +511,7 @@ img {
     box-shadow: 0.1px 5px 5px 5px rgba(10, 6, 6, 0.165);
   }
   main {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: repeat(2, 250px);
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    justify-items: center;
-    align-content: center;
   }
 }
